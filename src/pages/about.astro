@@ -1,0 +1,176 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { translations } from '../i18n/translations';
+
+const t = translations.en;
+---
+
+<Layout title="About" lang="en">
+  <section class="page-header">
+    <div class="container">
+      <h1 class="page-title">{t.about.title}</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="about-content">
+        <div class="mission-vision">
+          <div class="card mission-card">
+            <h2 class="card-title">{t.about.mission.title}</h2>
+            <p>{t.about.mission.description}</p>
+          </div>
+          <div class="card vision-card">
+            <h2 class="card-title">{t.about.vision.title}</h2>
+            <p>{t.about.vision.description}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section history-section">
+    <div class="container">
+      <h2 class="section-title">{t.about.history.title}</h2>
+      <div class="timeline">
+        {t.about.history.items.map((item, index) => (
+          <div class={`timeline-item animate-fade-in animate-delay-${index + 1}`}>
+            <div class="timeline-marker"></div>
+            <div class="timeline-content card">
+              <span class="timeline-year">{item.year}</span>
+              <p class="timeline-event">{item.event}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    background: var(--color-header-bg);
+    color: #fff;
+    padding: 80px 0;
+    text-align: center;
+  }
+  
+  .page-title {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+  
+  .about-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .mission-vision {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 16px;
+  }
+  
+  .mission-card p, .vision-card p {
+    color: var(--color-text-light);
+    line-height: 1.8;
+  }
+  
+  .history-section {
+    background-color: var(--color-bg-card);
+  }
+  
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background-color: var(--color-border);
+  }
+  
+  .timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 0 24px;
+    margin-bottom: 24px;
+  }
+  
+  .timeline-item:nth-child(odd) {
+    left: 0;
+    text-align: right;
+  }
+  
+  .timeline-item:nth-child(even) {
+    left: 50%;
+  }
+  
+  .timeline-marker {
+    position: absolute;
+    top: 24px;
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    border: 3px solid var(--color-bg-card);
+  }
+  
+  .timeline-item:nth-child(odd) .timeline-marker {
+    right: -8px;
+  }
+  
+  .timeline-item:nth-child(even) .timeline-marker {
+    left: -8px;
+  }
+  
+  .timeline-year {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+  
+  .timeline-event {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+  
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 2rem;
+    }
+    
+    .mission-vision {
+      grid-template-columns: 1fr;
+    }
+    
+    .timeline::before {
+      left: 20px;
+    }
+    
+    .timeline-item {
+      width: 100%;
+      left: 0 !important;
+      text-align: left !important;
+      padding-left: 48px;
+    }
+    
+    .timeline-marker {
+      left: 12px !important;
+      right: auto !important;
+    }
+  }
+</style>

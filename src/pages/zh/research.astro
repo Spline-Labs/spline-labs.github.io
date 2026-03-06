@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { translations } from '../../i18n/translations';
+
+const t = translations.zh;
+---
+
+<Layout title="研究" lang="zh">
+  <section class="page-header">
+    <div class="container">
+      <h1 class="page-title">{t.research.title}</h1>
+      <p class="page-subtitle">{t.research.subtitle}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="research-grid">
+        {t.research.areas.map((area, index) => (
+          <div class={`card research-card animate-fade-in animate-delay-${(index % 4) + 1}`}>
+            <div class="research-icon">
+              <svg viewBox="0 0 24 24" width="40" height="40">
+                <path d="M5 20 C 10 10, 15 30, 20 15 S 30 10, 35 20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <circle cx="5" cy="20" r="2" fill="currentColor"/>
+                <circle cx="20" cy="15" r="2" fill="currentColor"/>
+                <circle cx="35" cy="20" r="2" fill="currentColor"/>
+              </svg>
+            </div>
+            <h2 class="research-title">{area.title}</h2>
+            <p class="research-description">{area.description}</p>
+            <div class="research-keywords">
+              {area.keywords.map((keyword) => (
+                <span class="keyword">{keyword}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    background: var(--color-header-bg);
+    color: #fff;
+    padding: 80px 0;
+    text-align: center;
+  }
+  
+  .page-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  
+  .page-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+  }
+  
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  
+  .research-card {
+    position: relative;
+  }
+  
+  .research-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  .research-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 12px;
+  }
+  
+  .research-description {
+    color: var(--color-text-light);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  
+  .research-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .keyword {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: var(--color-border);
+    color: var(--color-text-light);
+    font-size: 0.8rem;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+  }
+  
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 2rem;
+    }
+    
+    .research-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

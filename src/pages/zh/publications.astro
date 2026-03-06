@@ -1,0 +1,162 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { translations } from '../../i18n/translations';
+
+const t = translations.zh;
+---
+
+<Layout title="成果" lang="zh">
+  <section class="page-header">
+    <div class="container">
+      <h1 class="page-title">{t.publications.title}</h1>
+      <p class="page-subtitle">{t.publications.subtitle}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="publications-container">
+        <div class="publications-categories">
+          {t.publications.categories.map((category) => (
+            <button class="category-btn" data-category={category.id}>
+              {category.title}
+            </button>
+          ))}
+        </div>
+        
+        <div class="publications-list">
+          {t.publications.papers.map((paper, index) => (
+            <div class={`card publication-card animate-fade-in animate-delay-${(index % 4) + 1}`} data-year={paper.year}>
+              <div class="publication-header">
+                <span class="publication-year">{paper.year}</span>
+                <span class="publication-journal">{paper.journal}</span>
+              </div>
+              <h3 class="publication-title">{paper.title}</h3>
+              <p class="publication-authors">{paper.authors}</p>
+              <p class="publication-abstract">{paper.abstract}</p>
+              <a href="#" class="publication-link">
+                查看论文 →
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    background: var(--color-header-bg);
+    color: #fff;
+    padding: 80px 0;
+    text-align: center;
+  }
+  
+  .page-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  
+  .page-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+  }
+  
+  .publications-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .publications-categories {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  
+  .category-btn {
+    padding: 10px 24px;
+    border: 2px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text-light);
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+  
+  .category-btn:hover, .category-btn.active {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+  }
+  
+  .publications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .publication-card {
+    padding: 32px;
+  }
+  
+  .publication-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .publication-year {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+  
+  .publication-journal {
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+  
+  .publication-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  
+  .publication-authors {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    margin-bottom: 12px;
+  }
+  
+  .publication-abstract {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  
+  .publication-link {
+    font-weight: 600;
+    color: var(--color-accent);
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 2rem;
+    }
+    
+    .publications-categories {
+      flex-wrap: wrap;
+    }
+  }
+</style>

@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { translations } from '../i18n/translations';
+
+const t = translations.en;
+---
+
+<Layout title="Resources" lang="en">
+  <section class="page-header">
+    <div class="container">
+      <h1 class="page-title">{t.resources.title}</h1>
+      <p class="page-subtitle">{t.resources.subtitle}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {t.resources.sections.map((section, sectionIndex) => (
+        <div class="resource-section">
+          <h2 class="section-title">{section.title}</h2>
+          <div class="grid grid-3">
+            {section.items.map((item, index) => (
+              <div class={`card resource-card animate-fade-in animate-delay-${(index % 3) + 1}`}>
+                <h3 class="resource-name">{item.name}</h3>
+                <p class="resource-description">{item.description}</p>
+                <a href={item.link} class="resource-link">Access →</a>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    background: var(--color-header-bg);
+    color: #fff;
+    padding: 80px 0;
+    text-align: center;
+  }
+  
+  .page-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  
+  .page-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+  }
+  
+  .resource-section {
+    margin-bottom: 64px;
+  }
+  
+  .resource-section:last-child {
+    margin-bottom: 0;
+  }
+  
+  .resource-section .section-title {
+    text-align: left;
+    font-size: 1.75rem;
+    margin-bottom: 24px;
+  }
+  
+  .resource-card {
+    text-align: center;
+  }
+  
+  .resource-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+  }
+  
+  .resource-description {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    margin-bottom: 16px;
+  }
+  
+  .resource-link {
+    font-weight: 600;
+    color: var(--color-accent);
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 2rem;
+    }
+  }
+</style>

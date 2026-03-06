@@ -1,0 +1,174 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { translations } from '../i18n/translations';
+
+const t = translations.en;
+---
+
+<Layout title="Contact" lang="en">
+  <section class="page-header">
+    <div class="container">
+      <h1 class="page-title">{t.contact.title}</h1>
+      <p class="page-subtitle">{t.contact.subtitle}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-section">
+          <div class="card">
+            <h2 class="contact-section-title">{t.contact.join.title}</h2>
+            <div class="positions-list">
+              {t.contact.join.positions.map((position, index) => (
+                <div class={`position-item animate-fade-in animate-delay-${index + 1}`}>
+                  <div class="position-header">
+                    <h3 class="position-title">{position.title}</h3>
+                    <span class="position-type">{position.type}</span>
+                  </div>
+                  <p class="position-description">{position.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-section">
+          <div class="card">
+            <h2 class="contact-section-title">{t.contact.collaborate.title}</h2>
+            <p class="collaborate-description">{t.contact.collaborate.description}</p>
+          </div>
+
+          <div class="card contact-info-card">
+            <h2 class="contact-section-title">{t.contact.info.title}</h2>
+            <div class="contact-info">
+              <div class="contact-info-item">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" fill="none"/>
+                </svg>
+                <span>{t.contact.info.email}</span>
+              </div>
+              <div class="contact-info-item">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" fill="none"/>
+                </svg>
+                <span>{t.contact.info.address}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    background: var(--color-header-bg);
+    color: #fff;
+    padding: 80px 0;
+    text-align: center;
+  }
+  
+  .page-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  
+  .page-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+  }
+  
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  
+  .contact-section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+  }
+  
+  .positions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .position-item {
+    padding: 16px;
+    background-color: var(--color-bg-card);
+    border-radius: var(--radius-md);
+  }
+  
+  .position-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .position-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  
+  .position-type {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    padding: 4px 10px;
+    background-color: rgba(237, 137, 54, 0.1);
+    border-radius: var(--radius-sm);
+  }
+  
+  .position-description {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+  }
+  
+  .collaborate-description {
+    color: var(--color-text-light);
+    line-height: 1.7;
+  }
+  
+  .contact-info-card {
+    margin-top: 24px;
+  }
+  
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .contact-info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-text-light);
+  }
+  
+  .contact-info-item svg {
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 2rem;
+    }
+    
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
