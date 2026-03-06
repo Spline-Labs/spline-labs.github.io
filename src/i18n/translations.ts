@@ -125,7 +125,7 @@ export const translations = {
       title: 'Publications',
       subtitle: 'Sharing our research findings',
       categories: [
-        { id: '2024', title: '2024-2025' },
+        { id: '2024', title: '2024-2026' },
         { id: '2022', title: '2022-2023' },
         { id: '2020', title: '2020-2021' },
       ],
@@ -134,21 +134,21 @@ export const translations = {
           title: 'Optimized dual NURBS curve interpolation for high-accuracy five-axis CNC path planning',
           authors: 'Yi Xu, Hairi Mohd Zaman, Feng Zhou',
           journal: 'Scientific Reports',
-          year: '2025',
+          year: '2026',
           abstract: 'This study presents a dual NURBS curve interpolation algorithm specifically designed for five-axis synchronized motion.',
         },
         {
           title: 'Geometric modelling based on non-classical NURBS for 3D printing',
           authors: 'Ronald M. Martinod',
           journal: 'International Journal on Interactive Design and Manufacturing',
-          year: '2025',
+          year: '2026',
           abstract: 'A novel method for rapid and flexible design of complex and nature-inspired surface textures.',
         },
         {
           title: 'Evaluation algorithms for parametric curves and surfaces',
           authors: 'Lanlan Yan',
           journal: 'Mathematics',
-          year: '2025',
+          year: '2026',
           abstract: 'Extends linear-complexity Bézier evaluation algorithm to all parametric curves and surfaces.',
         },
         {
@@ -215,7 +215,7 @@ export const translations = {
     },
     footer: {
       description: 'Advancing spline theory for modern engineering',
-      copyright: '© 2025 Spline-Labs. All rights reserved.',
+      copyright: '© 2026 Spline-Labs. All rights reserved.',
     },
   },
   zh: {
@@ -337,7 +337,7 @@ export const translations = {
       title: '研究成果',
       subtitle: '分享我们的研究发现',
       categories: [
-        { id: '2024', title: '2024-2025' },
+        { id: '2024', title: '2024-2026' },
         { id: '2022', title: '2022-2023' },
         { id: '2020', title: '2020-2021' },
       ],
@@ -346,21 +346,21 @@ export const translations = {
           title: '用于高精度五轴数控路径规划的优化双NURBS曲线插值',
           authors: 'Yi Xu, Hairi Mohd Zaman, Feng Zhou',
           journal: 'Scientific Reports',
-          year: '2025',
+          year: '2026',
           abstract: '提出了一种专门用于五轴同步运动的 dual NURBS 曲线插值算法。',
         },
         {
           title: '基于非经典NURBS的几何建模及其在3D打印中的应用',
           authors: 'Ronald M. Martinod',
           journal: 'International Journal on Interactive Design and Manufacturing',
-          year: '2025',
+          year: '2026',
           abstract: '一种用于快速灵活设计复杂自然灵感纹理表面的新方法。',
         },
         {
           title: '参数曲线曲面的求值算法',
           authors: 'Lanlan Yan',
           journal: 'Mathematics',
-          year: '2025',
+          year: '2026',
           abstract: '将线性复杂度Bezier求值算法扩展到所有参数曲线和曲面。',
         },
         {
@@ -427,7 +427,7 @@ export const translations = {
     },
     footer: {
       description: '推进样条理论，赋能现代工程',
-      copyright: '© 2025 Spline-Labs. 保留所有权利。',
+      copyright: '© 2026 Spline-Labs. 保留所有权利。',
     },
   },
 };
