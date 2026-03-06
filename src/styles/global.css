@@ -12,6 +12,7 @@
   --color-shadow: rgba(0, 0, 0, 0.1);
   --color-header-bg: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
   --color-section-bg: #f7fafc;
+  --color-footer-bg: #1a365d;
   
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -40,6 +41,7 @@
   --color-border: #2d3748;
   --color-shadow: rgba(0, 0, 0, 0.3);
   --color-section-bg: #0d1b2a;
+  --color-footer-bg: #0a1421;
 }
 
 *, *::before, *::after {
