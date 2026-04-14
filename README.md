@@ -1,6 +1,6 @@
 # Spline-Labs
 
-Spline Theory Research Website
+Spline Theory Research Official Website
 
 ## Overview
 
