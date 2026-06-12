@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>B-Spline Knot Removal</title>
+    <script type="module" crossorigin src="/knot-removal-app/assets/index-DEFXcN2K.js"></script>
+    <link rel="stylesheet" crossorigin href="/knot-removal-app/assets/index-CYtVph40.css">
+  </head>
+  <body>
+    <aside id="sidebar">
+      <header id="app-header">
+        <h1>Knot Removal</h1>
+        <span id="status-pill" data-state="idle">idle</span>
+      </header>
+      <div id="controls"></div>
+      <div id="log-panel">
+        <div id="log-title">Log</div>
+        <div id="log"></div>
+      </div>
+    </aside>
+    <main id="viewport">
+      <div id="progress-overlay" hidden>
+        <div id="progress-label"></div>
+        <div id="progress-track"><div id="progress-bar"></div></div>
+      </div>
+      <div id="legend">
+        <span class="chip"><i style="background: #4f8fd9"></i>Original</span>
+        <span class="chip"><i style="background: #3fc98b"></i>Result</span>
+      </div>
+      <div id="render-stats"></div>
+    </main>
+  </body>
+</html>

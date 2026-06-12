@@ -13,6 +13,7 @@ export const translations = {
       research: 'Research',
       publications: 'Publications',
       resources: 'Resources',
+      knotRemoval: 'Knot Removal',
       contact: 'Contact',
     },
     home: {
@@ -225,6 +226,7 @@ export const translations = {
       research: '研究',
       publications: '成果',
       resources: '资源',
+      knotRemoval: '节点移除',
       contact: '联系',
     },
     home: {
