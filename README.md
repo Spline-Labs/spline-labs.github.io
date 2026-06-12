@@ -75,6 +75,8 @@ Push to `main` branch. GitHub Actions will automatically build and deploy to Git
 | `/zh/publications` | Publications (Chinese) |
 | `/resources` | Resources (English) |
 | `/zh/resources` | Resources (Chinese) |
+| `/knot-removal` | Knot Removal Tool (English) |
+| `/zh/knot-removal` | Knot Removal Tool (Chinese) |
 | `/contact` | Contact (English) |
 | `/zh/contact` | Contact (Chinese) |
 
@@ -84,3 +86,23 @@ Push to `main` branch. GitHub Actions will automatically build and deploy to Git
 - Global styles in `src/styles/global.css`
 - Layout component in `src/layouts/Layout.astro`
 - Dark mode uses CSS variables: `--color-primary`, `--color-bg`, etc.
+
+### GitHub Pages Source Setting
+
+Ensure **Settings → Pages → Build and deployment → Source** is set to **GitHub Actions**. The default "Deploy from a branch" uses Jekyll which will fail on `.astro` files' YAML front matter.
+
+### Knot Removal Interactive Tool
+
+The `/knot-removal/` page embeds a standalone B-spline knot removal web app built with Vite + Three.js + WASM.
+
+**Source repo**: `H:\knot_removal\web-app-fable5` (not in this repo)
+
+**Rebuild procedure**:
+1. Modify source in `H:\knot_removal\web-app-fable5\src\`
+2. Run `npm run build` in that directory
+3. Copy `dist\` contents to `public\knot-removal-app\` in this repo
+4. Run `npm run build` to verify, then commit and push
+
+**Important**: The `vite.config.ts` base path must be `/knot-removal-app/` to match the public directory name.
+
+**Known issue**: GitHub Pages gzip-compresses `.bspl` binary preset files, so the `fetchBspl()` streaming reader must use dynamic chunk accumulation rather than a fixed-size buffer keyed to `Content-Length`.
