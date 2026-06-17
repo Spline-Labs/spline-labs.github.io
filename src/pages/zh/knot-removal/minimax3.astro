@@ -1,0 +1,28 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { translations } from '../../../i18n/translations';
+
+const t = translations.zh;
+---
+
+<Layout title={`${t.nav.knotRemovalLabel} - ${t.nav.minimax3}`} lang="zh">
+  <style>
+    .knot-removal-container {
+      width: 100%;
+      height: calc(100vh - 72px);
+      margin: 0;
+      padding: 0;
+      border: none;
+      display: block;
+    }
+    .knot-removal-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+  </style>
+  <div class="knot-removal-container">
+    <iframe class="knot-removal-iframe" src="/knot-removal-minimax3-app/" title="Knot Removal Minimax3"></iframe>
+  </div>
+</Layout>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/knot-removal/minimax3/favicon.svg" />
+  <title>Knot Removal Web App</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Segoe UI', system-ui, sans-serif; }
+    #app { width: 100%; height: 100%; position: relative; }
+    #canvas-container { width: 100%; height: 100%; }
+    #panel-left { position: absolute; top: 10px; left: 10px; width: 260px; background: rgba(30,30,30,0.92); color: #eee; border-radius: 8px; padding: 12px; font-size: 13px; max-height: calc(100% - 20px); overflow-y: auto; }
+    #panel { position: absolute; top: 10px; right: 10px; width: 300px; background: rgba(30,30,30,0.92); color: #eee; border-radius: 8px; padding: 12px; font-size: 13px; max-height: calc(100% - 20px); overflow-y: auto; }
+    #panel-left h2, #panel h2 { font-size: 14px; margin-bottom: 8px; color: #4fc3f7; }
+    #panel-left label, #panel label { display: block; margin-top: 6px; font-size: 12px; color: #bbb; }
+    #panel-left input, #panel-left select, #panel-left button,
+    #panel input, #panel select, #panel button { width: 100%; margin-top: 2px; padding: 4px 6px; background: #444; color: #eee; border: 1px solid #555; border-radius: 4px; font-size: 12px; }
+    #panel-left button, #panel button { cursor: pointer; background: #1976d2; border: none; margin-top: 8px; padding: 6px; font-weight: bold; }
+    #panel-left button:hover, #panel button:hover { background: #2196f3; }
+    #panel-left button:disabled, #panel button:disabled { background: #555; cursor: default; }
+    #panel-left .section, #panel .section { border-top: 1px solid #444; margin-top: 8px; padding-top: 8px; }
+    #log { position: absolute; bottom: 10px; left: 280px; right: 320px; background: rgba(0,0,0,0.78); color: #8f8; font-size: 13px; padding: 6px 10px; border-radius: 4px; max-height: 113px; overflow-y: auto; font-family: 'Consolas', 'Courier New', monospace; line-height: 1.4; border: 1px solid #2a2a2a; }
+    #log .log-entry { padding: 1px 0; white-space: pre-wrap; word-break: break-word; }
+    #log .log-time { color: #6a6a6a; margin-right: 10px; }
+    #log .log-msg-error { color: #ff8a8a; }
+    #progress { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); min-width: 320px; max-width: 50%; background: rgba(20,20,30,0.94); color: #dde; border: 1px solid #4fc3f7; border-radius: 6px; padding: 10px 14px; font-size: 12px; font-family: 'Segoe UI', system-ui, sans-serif; box-shadow: 0 2px 10px rgba(0,0,0,0.6); z-index: 100; }
+    #progress[hidden] { display: none; }
+    #progress-label { font-weight: bold; color: #4fc3f7; margin-bottom: 6px; }
+    #progress-track { width: 100%; height: 8px; background: #222; border-radius: 4px; overflow: hidden; }
+    #progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #4fc3f7, #81d4fa); transition: width 0.15s linear; }
+    #progress-fill.indeterminate { width: 30% !important; background: linear-gradient(90deg, transparent, #4fc3f7 50%, transparent); background-size: 200% 100%; animation: progress-indet 1.2s linear infinite; transition: none; }
+    @keyframes progress-indet { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+    #progress-detail { font-size: 11px; color: #8f8; margin-top: 6px; font-family: monospace; }
+    /* Vertical toolbar to the left of #panel. Three icon buttons stacked.
+       Active state (.active) is toggled by main.ts to show pivot / ortho
+       modes are enabled. */
+    #toolbar {
+      position: absolute;
+      top: 50%;
+      right: 320px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 5;
+    }
+    #toolbar button {
+      width: 40px;
+      height: 56px;
+      background: rgba(30, 30, 30, 0.92);
+      color: #ddd;
+      border: 1px solid #555;
+      border-radius: 6px;
+      cursor: pointer;
+      padding: 4px 0;
+      margin: 0;
+      font-size: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      transition: background 0.1s, border-color 0.1s;
+    }
+    #toolbar button:hover { background: rgba(60, 60, 80, 0.95); border-color: #888; }
+    #toolbar button.active { background: rgba(79, 195, 247, 0.25); border-color: #4fc3f7; color: #4fc3f7; }
+    #toolbar button svg { display: block; pointer-events: none; }
+    #toolbar button .toolbar-label { line-height: 1; pointer-events: none; }
+  </style>
+  <script type="module" crossorigin src="/knot-removal/minimax3/assets/index-lkj7K9rV.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div id="canvas-container"></div>
+    <div id="panel-left"></div>
+    <div id="toolbar">
+      <button id="tool-pivot" title="Click a point on the model to set the orbit pivot around that point">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="8"/>
+          <circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/>
+          <line x1="12" y1="2" x2="12" y2="6"/>
+          <line x1="12" y1="18" x2="12" y2="22"/>
+          <line x1="2" y1="12" x2="6" y2="12"/>
+          <line x1="18" y1="12" x2="22" y2="12"/>
+        </svg>
+        <span class="toolbar-label">Pivot</span>
+      </button>
+      <button id="tool-fit" title="Frame the entire model in the view">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="4 8 4 4 8 4"/>
+          <polyline points="20 8 20 4 16 4"/>
+          <polyline points="4 16 4 20 8 20"/>
+          <polyline points="20 16 20 20 16 20"/>
+          <circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/>
+        </svg>
+        <span class="toolbar-label">Fit</span>
+      </button>
+      <button id="tool-ortho" title="Toggle orthographic projection">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3 L21 8 L21 16 L12 21 L3 16 L3 8 Z"/>
+          <path d="M3 8 L12 13 L21 8"/>
+          <line x1="12" y1="13" x2="12" y2="21"/>
+        </svg>
+        <span class="toolbar-label">Ortho</span>
+      </button>
+    </div>
+    <div id="panel"></div>
+    <div id="progress" hidden>
+      <div id="progress-label">Loading…</div>
+      <div id="progress-track"><div id="progress-fill" class="indeterminate"></div></div>
+      <div id="progress-detail"></div>
+    </div>
+    <div id="log"></div>
+  </div>
+</body>
+</html>

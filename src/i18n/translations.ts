@@ -13,7 +13,9 @@ export const translations = {
       research: 'Research',
       publications: 'Publications',
       resources: 'Resources',
-      knotRemoval: 'Knot Removal',
+      knotRemovalLabel: 'Knot Removal',
+      fable5: 'Fable5',
+      minimax3: 'Minimax3',
       contact: 'Contact',
     },
     home: {
@@ -226,7 +228,9 @@ export const translations = {
       research: '研究',
       publications: '成果',
       resources: '资源',
-      knotRemoval: '节点移除',
+      knotRemovalLabel: '节点移除',
+      fable5: 'Fable5',
+      minimax3: 'Minimax3',
       contact: '联系',
     },
     home: {
