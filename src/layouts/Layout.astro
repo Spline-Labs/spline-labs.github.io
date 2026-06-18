@@ -94,8 +94,13 @@ const t = translations[lang as keyof typeof translations] || translations[defaul
           <a href={`/${lang === 'en' ? 'research' : 'zh/research'}`}>{t.nav.research}</a>
           <a href={`/${lang === 'en' ? 'publications' : 'zh/publications'}`}>{t.nav.publications}</a>
           <a href={`/${lang === 'en' ? 'resources' : 'zh/resources'}`}>{t.nav.resources}</a>
-          <a href={`/${lang === 'en' ? 'knot-removal/fable5' : 'zh/knot-removal/fable5'}`}>{t.nav.knotRemovalLabel}: Fable5</a>
-          <a href={`/${lang === 'en' ? 'knot-removal/minimax3' : 'zh/knot-removal/minimax3'}`}>{t.nav.knotRemovalLabel}: Minimax3</a>
+          <div class="nav-dropdown footer-dropdown">
+            <span class="nav-dropdown-trigger">{t.nav.knotRemovalLabel}</span>
+            <div class="nav-dropdown-menu footer-dropdown-menu">
+              <a href={`/${lang === 'en' ? 'knot-removal/fable5' : 'zh/knot-removal/fable5'}`}>{t.nav.fable5}</a>
+              <a href={`/${lang === 'en' ? 'knot-removal/minimax3' : 'zh/knot-removal/minimax3'}`}>{t.nav.minimax3}</a>
+            </div>
+          </div>
           <a href={`/${lang === 'en' ? 'contact' : 'zh/contact'}`}>{t.nav.contact}</a>
         </div>
       </div>
@@ -306,6 +311,32 @@ const t = translations[lang as keyof typeof translations] || translations[defaul
     
     .footer-links a:hover {
       opacity: 1;
+      color: var(--color-accent);
+    }
+    
+    .footer-dropdown .nav-dropdown-trigger {
+      color: #fff;
+      opacity: 0.9;
+    }
+    
+    .footer-dropdown .nav-dropdown-trigger:hover {
+      color: var(--color-accent);
+      opacity: 1;
+    }
+    
+    .footer-dropdown-menu {
+      bottom: 100%;
+      top: auto;
+      background: rgba(26, 54, 93, 0.95);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .footer-dropdown-menu a {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .footer-dropdown-menu a:hover {
+      background: rgba(255, 255, 255, 0.1);
       color: var(--color-accent);
     }
     
